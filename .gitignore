@@ -3,7 +3,7 @@
 /local.properties
 /.idea/caches
 /.idea/tasks.xml
-/.idea/gradle.xml
+.idea/gradle.xml
 /.idea/libraries
 /.idea/modules.xml
 /.idea/workspace.xml
