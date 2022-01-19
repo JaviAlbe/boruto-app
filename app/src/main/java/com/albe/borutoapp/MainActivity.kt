@@ -12,7 +12,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.albe.borutoapp.navigation.SetupNavGraph
 import com.albe.borutoapp.ui.theme.BorutoAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+/**This annotation tells DagerHilt where the dependencies must be injected*/
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private lateinit var navController: NavHostController
