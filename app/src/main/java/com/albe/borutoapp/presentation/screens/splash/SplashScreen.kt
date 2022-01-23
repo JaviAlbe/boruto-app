@@ -1,16 +1,19 @@
 package com.albe.borutoapp.presentation.screens.splash
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import android.window.SplashScreen
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -25,11 +28,27 @@ import com.albe.borutoapp.ui.theme.Purple700
 /** A Splash Screen which changes depending on Normal or Dark theme*/
 @Composable
 fun SplashScreen(navController: NavHostController) {
-    Splash()
+
+    //Making the Splash Screen logo animated
+    val degree = remember { Animatable(0f) }
+
+    //The animation will play only the first time
+    LaunchedEffect(key1 = true){
+        degree.animateTo(
+            targetValue = 360f,
+            animationSpec = tween(
+                durationMillis = 1000,
+                delayMillis = 200
+            )
+        )
+    }
+
+
+    Splash(degrees = degree.value)
 }
 
 @Composable
-fun Splash() {
+fun Splash(degrees: Float) {
 
     if (isSystemInDarkTheme()) {
         Box(
@@ -40,6 +59,7 @@ fun Splash() {
             contentAlignment = Alignment.Center
         ) {
             Image(
+                modifier = Modifier.rotate(degrees = degrees),
                 painter = painterResource(id = R.drawable.ic_logo),
                 contentDescription = stringResource(R.string.app_logo)
             )
@@ -53,6 +73,7 @@ fun Splash() {
             contentAlignment = Alignment.Center
         ) {
             Image(
+                modifier = Modifier.rotate(degrees = degrees),
                 painter = painterResource(id = R.drawable.ic_logo),
                 contentDescription = stringResource(R.string.app_logo)
             )
@@ -63,11 +84,11 @@ fun Splash() {
 @Preview
 @Composable
 fun SplashScreenPreview() {
-    Splash()
+    Splash(degrees = 0f)
 }
 
 @Preview(uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun SplashScreenDarkPreview() {
-    Splash()
+    Splash(degrees = 0f)
 }
