@@ -20,6 +20,7 @@ import androidx.navigation.NavHostController
 import com.albe.borutoapp.R
 import com.albe.borutoapp.domain.model.OnBoardingPage
 import com.albe.borutoapp.ui.theme.*
+import com.albe.borutoapp.util.Constants.LAST_ONBOARDING_PAGE
 import com.albe.borutoapp.util.Constants.ON_BOARDING_PAGE_COUNT
 import com.google.accompanist.pager.*
 
@@ -124,7 +125,7 @@ fun FinishButton(
     ) {
         AnimatedVisibility(
             modifier = Modifier.fillMaxWidth(),
-            visible = pagerState.currentPage == 2
+            visible = pagerState.currentPage == LAST_ONBOARDING_PAGE
         ) {
             Button(
                 onClick = onClick,
